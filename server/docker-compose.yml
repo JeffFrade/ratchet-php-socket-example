@@ -1,0 +1,26 @@
+version: '3.5'
+services:
+  server-php-fpm:
+    build: ./docker/php
+    image: jefffrade/ratchet-server:php-fpm
+    restart: on-failure
+    container_name: jefffrade-ratchet-server-php-fpm
+    command: php index.php
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/server
+    networks:
+      - ratchet
+    healthcheck:
+      test: ['CMD', 'sh', '-c', 'netstat -an | fgrep 9000 | fgrep -q LISTEN']
+      interval: 10s
+      timeout: 5s
+      retries: 2
+
+networks:
+  ratchet:
+    driver: bridge
+    name: ratchet-server
+
+

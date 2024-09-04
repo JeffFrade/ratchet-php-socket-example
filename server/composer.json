@@ -1,0 +1,17 @@
+{
+    "name": "jefferson/server",
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jefferson Frade",
+            "email": "jefferrson.frade@gmail.com"
+        }
+    ],
+    "require": {
+        "cboden/ratchet": "^0.4.4"
+    }
+}

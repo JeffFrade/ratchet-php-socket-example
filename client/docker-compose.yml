@@ -1,0 +1,44 @@
+version: '3.5'
+services:
+  client-php-fpm:
+    build: ./docker/php
+    image: jefffrade/ratchet-client:php-fpm
+    restart: on-failure
+    container_name: jefffrade-ratchet-client-php-fpm
+    command: php-fpm
+    volumes:
+      - ./:/client
+    networks:
+      - ratchet
+    healthcheck:
+      test: ['CMD', 'sh', '-c', 'netstat -an | fgrep 9000 | fgrep -q LISTEN']
+      interval: 10s
+      timeout: 5s
+      retries: 2
+
+  client-nginx:
+    build: ./docker/nginx
+    image: jefffrade/ratchet-client:nginx
+    restart: on-failure
+    container_name: jefffrade-ratchet-client-nginx
+    command: nginx -g "daemon off;"
+    links:
+      - client-php-fpm
+    ports:
+      - "8001:80"
+    volumes:
+      - ./:/client
+    external_links:
+      - server-php-fpm:server-php-fpm
+    networks:
+      - ratchet
+    healthcheck:
+      test: ['CMD', 'sh', '-c', 'netstat -an | fgrep 80 | fgrep -q LISTEN']
+      interval: 10s
+      timeout: 5s
+      retries: 2
+
+networks:
+  ratchet:
+    name: ratchet-server
+    external: true
