@@ -7,6 +7,7 @@ use Ratchet\ConnectionInterface;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use Ratchet\WebSocket\MessageComponentInterface;
 
+// Pode renomear essa classe para algo mais consistente com o seu uso.
 class SistemaChat implements MessageComponentInterface
 {
     protected $cliente;

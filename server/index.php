@@ -1,5 +1,6 @@
 <?php
 
+// Atenção a esse passo, trocar o nome dessa classe de acordo com o nome da classe do outro arquivo.
 use Src\SistemaChat;
 use Ratchet\Http\HttpServer;
 use Ratchet\Server\IoServer;
@@ -17,6 +18,7 @@ require __DIR__ . '/vendor/autoload.php';
 $server = IoServer::factory(
     new HttpServer(
         new WsServer(
+            // Atenção a esse passo, trocar o nome dessa classe de acordo com o nome da classe do outro arquivo.
             new SistemaChat()
         )
     ),

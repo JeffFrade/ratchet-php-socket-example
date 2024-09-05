@@ -34,6 +34,11 @@ ob_start(); // Limpar o buffer de saida para evitar erro de redirecionamento
         const mensagemChat = document.getElementById('mensagem-chat');
 
         // Endereço do websocket
+
+        // Caso de utilizar SSL, trocar o ws: para wss:
+        // Caso queira utilizar em outro IP ou host, basta trocar o 'localhost".
+        // Ficar atento também a porta (:8080 nesse exemplo) utilizada.
+        // Caso o Web Socket conecte com sucesso o status code esperado da requisição é 101 (Console do browser).
         const ws = new WebSocket('ws://localhost:8080');
 
         // Realizar a conexão com websocket

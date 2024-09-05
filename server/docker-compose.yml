@@ -12,15 +12,8 @@ services:
       - ./:/server
     networks:
       - ratchet
-    healthcheck:
-      test: ['CMD', 'sh', '-c', 'netstat -an | fgrep 9000 | fgrep -q LISTEN']
-      interval: 10s
-      timeout: 5s
-      retries: 2
 
 networks:
   ratchet:
     driver: bridge
     name: ratchet-server
-
-
